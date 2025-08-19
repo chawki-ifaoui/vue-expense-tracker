@@ -2,19 +2,19 @@
   <v-app>
     <Header />
     <v-main class="bg-grey-lighten-4">
-      <v-container class="py-8">
+      <v-container class="py-4 py-md-8 px-4">
         <v-row justify="center">
-          <v-col cols="12" md="8" lg="6">
-            <v-card class="pa-6" elevation="3">
+          <v-col cols="12" sm="10" md="8" lg="6">
+            <v-card class="pa-4 pa-md-6" elevation="3">
               <Balance :total="total" />
-              <v-divider class="my-6"></v-divider>
+              <v-divider class="my-4 my-md-6"></v-divider>
               <IncomeExpenses :income="+income" :expenses="+expenses" />
-              <v-divider class="my-6"></v-divider>
+              <v-divider class="my-4 my-md-6"></v-divider>
               <TransactionList
                 :transactions="transactions"
                 @transactionDeleted="handleTransactionDeleted"
               />
-              <v-divider class="my-6"></v-divider>
+              <v-divider class="my-4 my-md-6"></v-divider>
               <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
             </v-card>
           </v-col>

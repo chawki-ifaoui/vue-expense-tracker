@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card-title class="text-h5 font-weight-bold mb-4">
+    <v-card-title class="text-h6 text-md-h5 font-weight-bold mb-3 mb-md-4">
       <v-icon icon="mdi-plus-circle" class="me-2"></v-icon>
       Add New Transaction
     </v-card-title>
@@ -13,7 +13,9 @@
         variant="outlined"
         prepend-inner-icon="mdi-text"
         :rules="[v => !!v || 'Description is required']"
-        class="mb-4"
+        class="mb-3 mb-md-4"
+        density="compact"
+        density-md="default"
       ></v-text-field>
       
       <v-text-field
@@ -29,7 +31,9 @@
           v => !isNaN(v) || 'Amount must be a number',
           v => parseFloat(v) !== 0 || 'Amount cannot be zero'
         ]"
-        class="mb-6"
+        class="mb-4 mb-md-6"
+        density="compact"
+        density-md="default"
       >
         <template v-slot:append>
           <v-tooltip location="top">
@@ -38,6 +42,8 @@
                 v-bind="props"
                 icon="mdi-information"
                 color="info"
+                size="small"
+                size-md="default"
               ></v-icon>
             </template>
             <span>Positive for income, negative for expense</span>
@@ -49,9 +55,11 @@
         type="submit"
         color="primary"
         size="large"
+        size-md="x-large"
         block
         :loading="loading"
         prepend-icon="mdi-plus"
+        class="text-body-1 text-md-h6"
       >
         Add Transaction
       </v-btn>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card-title class="text-h5 font-weight-bold mb-4">
+    <v-card-title class="text-h6 text-md-h5 font-weight-bold mb-3 mb-md-4">
       <v-icon icon="mdi-history" class="me-2"></v-icon>
       Transaction History
     </v-card-title>
@@ -15,23 +15,26 @@
         <template v-slot:prepend>
           <v-avatar
             :color="transaction.amount < 0 ? 'error' : 'success'"
-            size="40"
+            size="32"
+            size-md="40"
           >
             <v-icon
               :icon="transaction.amount < 0 ? 'mdi-minus' : 'mdi-plus'"
               color="white"
+              size="16"
+              size-md="20"
             ></v-icon>
           </v-avatar>
         </template>
         
-        <v-list-item-title class="font-weight-medium">
+        <v-list-item-title class="font-weight-medium text-body-2 text-md-body-1">
           {{ transaction.text }}
         </v-list-item-title>
         
         <template v-slot:append>
           <div class="d-flex align-center">
             <span
-              class="text-h6 font-weight-bold me-3"
+              class="text-body-1 text-md-h6 font-weight-bold me-2 me-md-3"
               :class="transaction.amount < 0 ? 'text-error' : 'text-success'"
             >
               {{ transaction.amount < 0 ? '-' : '+' }}${{ Math.abs(transaction.amount).toFixed(2) }}
@@ -41,6 +44,7 @@
               variant="text"
               color="error"
               size="small"
+              size-md="default"
               @click="deleteTransaction(transaction.id)"
             ></v-btn>
           </div>

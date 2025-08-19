@@ -7,10 +7,11 @@
     <v-container class="d-flex align-center">
       <v-icon
         icon="mdi-wallet"
-        size="32"
-        class="me-3"
+        size="24"
+        size-md="32"
+        class="me-2 me-md-3"
       ></v-icon>
-      <v-toolbar-title class="text-h4 font-weight-bold">
+      <v-toolbar-title class="text-h5 text-md-h4 font-weight-bold">
         Expense Tracker
       </v-toolbar-title>
     </v-container>
