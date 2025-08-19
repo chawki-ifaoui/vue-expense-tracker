@@ -8,7 +8,11 @@
             <v-card class="pa-4 pa-md-6" elevation="3">
               <Balance :total="total" />
               <v-divider class="my-4 my-md-6"></v-divider>
-              <IncomeExpenses :income="+income" :expenses="+expenses" />
+              <IncomeExpenses 
+                :income="+income" 
+                :expenses="+expenses" 
+                :transactions="transactions"
+              />
               <v-divider class="my-4 my-md-6"></v-divider>
               <TransactionList
                 :transactions="transactions"
@@ -43,7 +47,16 @@ onMounted(() => {
   const savedTransactions = JSON.parse(localStorage.getItem('transactions'));
 
   if (savedTransactions) {
-    transactions.value = savedTransactions;
+    // Add date field to existing transactions if they don't have it
+    transactions.value = savedTransactions.map(transaction => ({
+      ...transaction,
+      date: transaction.date || new Date().toISOString().substr(0, 10),
+      displayDate: transaction.displayDate || new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })
+    }));
   }
 });
 
@@ -76,6 +89,8 @@ const handleTransactionSubmitted = (transactionData) => {
     id: generateUniqueId(),
     text: transactionData.text,
     amount: transactionData.amount,
+    date: transactionData.date,
+    displayDate: transactionData.displayDate,
   });
 
   saveTransactionsToLocalStorage();

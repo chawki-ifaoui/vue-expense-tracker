@@ -1,13 +1,16 @@
 # Vue Expense Tracker
 
-A modern, responsive expense tracking application built with Vue 3, Vite, and Vuetify. This application helps users manage their personal finances by tracking income and expenses with a beautiful, intuitive interface featuring Material Design components. Optimized for both desktop and mobile devices with PWA capabilities.
+A modern, responsive expense tracking application built with Vue 3, Vite, and Vuetify. This application helps users manage their personal finances by tracking income and expenses with a beautiful, intuitive interface featuring Material Design components. Optimized for both desktop and mobile devices with PWA capabilities and comprehensive date tracking.
 
 ## 🚀 Features
 
 - **Add Transactions**: Easily add income (positive amounts) and expenses (negative amounts)
+- **Date Tracking**: Add dates to all transactions with a beautiful date picker
 - **Real-time Balance**: View your current balance updated in real-time
 - **Income/Expense Summary**: See total income and expenses at a glance with beautiful cards
-- **Transaction History**: View all your transactions in a modern list format with icons
+- **Transaction History**: View all your transactions in a modern list format with dates and icons
+- **Date Filtering**: Filter transactions by date ranges (Today, Yesterday, This Week, This Month, etc.)
+- **Smart Date Display**: Intelligent date formatting (Today, Yesterday, Weekday names, etc.)
 - **Delete Transactions**: Remove unwanted transactions with a single click
 - **Local Storage**: All data is automatically saved to your browser's local storage
 - **Toast Notifications**: Get instant feedback when adding or deleting transactions
@@ -27,6 +30,7 @@ A modern, responsive expense tracking application built with Vue 3, Vite, and Vu
 - **Notifications**: Vue Toastification
 - **Data Persistence**: Local Storage
 - **Mobile Optimization**: Responsive design with PWA support
+- **Date Handling**: Native JavaScript Date API with intelligent formatting
 
 ## 🎨 Design Features
 
@@ -38,6 +42,7 @@ A modern, responsive expense tracking application built with Vue 3, Vite, and Vu
 - **Typography**: Inter font for excellent readability
 - **Icons**: Meaningful icons throughout the interface for better UX
 - **Mobile-First Design**: Optimized for mobile devices with touch-friendly elements
+- **Date Picker**: Beautiful modal date picker for transaction dates
 
 ## 📱 Mobile Features
 
@@ -48,6 +53,23 @@ A modern, responsive expense tracking application built with Vue 3, Vite, and Vu
 - **PWA Support**: Can be installed as a mobile app on supported devices
 - **Landscape Mode**: Optimized layout for landscape orientation
 - **High DPI Support**: Crisp graphics on high-resolution displays
+- **Mobile Date Picker**: Touch-friendly date selection on mobile devices
+
+## 📅 Date Features
+
+- **Transaction Dating**: Add dates to all transactions with a user-friendly date picker
+- **Smart Date Display**: Intelligent date formatting that shows "Today", "Yesterday", or weekday names
+- **Date Filtering**: Filter transactions by various date ranges:
+  - All Time
+  - Today
+  - Yesterday
+  - This Week
+  - This Month
+  - Last 30 Days
+  - Custom Range
+- **Date-based Sorting**: Transactions automatically sorted by date (newest first)
+- **Date Range Summary**: Income/Expense cards show the date range of displayed transactions
+- **Backward Compatibility**: Existing transactions without dates are automatically assigned today's date
 
 ## 📦 Installation
 
@@ -99,13 +121,21 @@ The app can be installed as a Progressive Web App (PWA) on mobile devices:
 2. Enter the amount:
    - **Positive numbers** for income (e.g., 500)
    - **Negative numbers** for expenses (e.g., -50)
-3. Click "Add Transaction" button
+3. Click on the "Date" field to select a transaction date (defaults to today)
+4. Click "Add Transaction" button
 
 ### Managing Transactions
 - View your current balance in the prominent card at the top
-- See total income and expenses in the color-coded summary cards
-- Scroll through your transaction history with visual indicators
+- See total income and expenses in the color-coded summary cards with date range
+- Use the date filter to view transactions from specific time periods
+- Scroll through your transaction history with dates and visual indicators
 - Click the delete icon to remove any transaction
+
+### Date Filtering
+- Use the "Filter by Date" dropdown to view transactions from different time periods
+- Choose from predefined ranges like "Today", "This Week", "This Month"
+- View "All Time" to see all transactions
+- Transactions are automatically sorted by date (newest first)
 
 ### Data Persistence
 - All transactions are automatically saved to your browser's local storage
@@ -118,14 +148,14 @@ The app can be installed as a Progressive Web App (PWA) on mobile devices:
 vue-expense-tracker/
 ├── src/
 │   ├── components/
-│   │   ├── AddTransaction.vue    # Modern form with Vuetify components
+│   │   ├── AddTransaction.vue    # Modern form with date picker and Vuetify components
 │   │   ├── Balance.vue          # Balance display with Material Design card
 │   │   ├── Header.vue           # Gradient app bar with wallet icon
-│   │   ├── IncomeExpenses.vue   # Income/expense cards with icons
-│   │   └── TransactionList.vue  # Modern list with avatars and actions
+│   │   ├── IncomeExpenses.vue   # Income/expense cards with date range display
+│   │   └── TransactionList.vue  # Modern list with dates, filtering, and actions
 │   ├── assets/
 │   │   └── style.css           # Custom styles and mobile optimizations
-│   ├── App.vue                 # Main application with Vuetify layout
+│   ├── App.vue                 # Main application with Vuetify layout and date handling
 │   └── main.js                # Vuetify configuration and app setup
 ├── public/                    # Static assets
 ├── index.html                # HTML template with PWA meta tags
@@ -134,11 +164,11 @@ vue-expense-tracker/
 
 ## 🎨 Key Components
 
-- **App.vue**: Main application with Vuetify layout, state management, and data persistence
-- **AddTransaction.vue**: Modern form with Vuetify text fields, validation, and loading states
+- **App.vue**: Main application with Vuetify layout, state management, date handling, and data persistence
+- **AddTransaction.vue**: Modern form with Vuetify text fields, date picker, validation, and loading states
 - **Balance.vue**: Material Design card displaying current total balance
-- **IncomeExpenses.vue**: Color-coded cards showing income and expense summaries with icons
-- **TransactionList.vue**: Modern list with avatars, icons, and delete functionality
+- **IncomeExpenses.vue**: Color-coded cards showing income and expense summaries with date range information
+- **TransactionList.vue**: Modern list with dates, filtering, avatars, icons, and delete functionality
 - **Header.vue**: Beautiful gradient app bar with wallet icon and typography
 
 ## 🎨 Vuetify Styling
@@ -156,6 +186,7 @@ The application uses Vuetify 3 for a modern Material Design interface:
 - **Text Fields**: Outlined fields with validation and icons
 - **Lists**: Clean list items with avatars and action buttons
 - **App Bar**: Gradient background with professional typography
+- **Date Picker**: Beautiful modal date picker with calendar interface
 
 ### **Mobile Optimizations**
 - **Responsive Grid**: Vuetify's responsive grid system for all screen sizes
@@ -163,6 +194,7 @@ The application uses Vuetify 3 for a modern Material Design interface:
 - **Mobile Typography**: Responsive text sizing for different screen sizes
 - **Form Optimization**: Mobile-optimized form fields with proper keyboard handling
 - **Landscape Support**: Optimized layouts for landscape orientation
+- **Mobile Date Picker**: Touch-friendly date selection interface
 
 ### **Custom Enhancements**
 - Smooth transitions and hover animations
@@ -170,6 +202,7 @@ The application uses Vuetify 3 for a modern Material Design interface:
 - Responsive typography adjustments
 - Gradient backgrounds and modern color schemes
 - Mobile-specific CSS optimizations
+- Intelligent date formatting and display
 
 ## 🔧 Customization
 
@@ -179,6 +212,7 @@ The application uses Vuetify for styling with custom CSS enhancements. You can c
 2. **Updating component styles** in individual Vue files
 3. **Customizing global styles** in `src/assets/style.css`
 4. **Adjusting mobile breakpoints** in the CSS media queries
+5. **Customizing date formatting** in the date utility functions
 
 ## 📱 Browser Support
 
@@ -188,6 +222,7 @@ This application works in all modern browsers that support:
 - Local Storage API
 - Material Design Icons
 - Progressive Web App features
+- Date API and formatting
 
 ## 🤝 Contributing
 
