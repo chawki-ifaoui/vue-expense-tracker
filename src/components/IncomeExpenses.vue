@@ -1,14 +1,50 @@
 <template>
-  <div class="inc-exp-container">
-    <div>
-      <h4>Income</h4>
-      <p id="money-plus" class="money plus">+${{ income }}</p>
-    </div>
-    <div>
-      <h4>Expense</h4>
-      <p id="money-minus" class="money minus">-${{ expenses }}</p>
-    </div>
-  </div>
+  <v-row>
+    <v-col cols="6">
+      <v-card
+        class="pa-4 text-center"
+        color="success"
+        elevation="2"
+      >
+        <v-icon
+          icon="mdi-trending-up"
+          size="32"
+          color="white"
+          class="mb-2"
+        ></v-icon>
+        <v-card-title class="text-h6 text-white font-weight-medium">
+          INCOME
+        </v-card-title>
+        <v-card-text class="pa-0">
+          <div class="text-h5 font-weight-bold text-white">
+            +${{ income.toFixed(2) }}
+          </div>
+        </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col cols="6">
+      <v-card
+        class="pa-4 text-center"
+        color="error"
+        elevation="2"
+      >
+        <v-icon
+          icon="mdi-trending-down"
+          size="32"
+          color="white"
+          class="mb-2"
+        ></v-icon>
+        <v-card-title class="text-h6 text-white font-weight-medium">
+          EXPENSE
+        </v-card-title>
+        <v-card-text class="pa-0">
+          <div class="text-h5 font-weight-bold text-white">
+            -${{ Math.abs(expenses).toFixed(2) }}
+          </div>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script setup>

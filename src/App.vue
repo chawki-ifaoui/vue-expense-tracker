@@ -1,14 +1,27 @@
 <template>
-  <Header />
-  <div class="container">
-    <Balance :total="total" />
-    <IncomeExpenses :income="+income" :expenses="+expenses" />
-    <TransactionList
-      :transactions="transactions"
-      @transactionDeleted="handleTransactionDeleted"
-    />
-    <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
-  </div>
+  <v-app>
+    <Header />
+    <v-main class="bg-grey-lighten-4">
+      <v-container class="py-8">
+        <v-row justify="center">
+          <v-col cols="12" md="8" lg="6">
+            <v-card class="pa-6" elevation="3">
+              <Balance :total="total" />
+              <v-divider class="my-6"></v-divider>
+              <IncomeExpenses :income="+income" :expenses="+expenses" />
+              <v-divider class="my-6"></v-divider>
+              <TransactionList
+                :transactions="transactions"
+                @transactionDeleted="handleTransactionDeleted"
+              />
+              <v-divider class="my-6"></v-divider>
+              <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script setup>

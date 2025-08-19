@@ -1,24 +1,62 @@
 <template>
-  <h3>Add new transaction</h3>
-  <form id="form" @submit.prevent="onSubmit">
-    <div class="form-control">
-      <label for="text">Text</label>
-      <input type="text" id="text" placeholder="Enter text..." v-model="text" />
-    </div>
-    <div class="form-control">
-      <label for="amount"
-        >Amount <br />
-        (negative - expense, positive - income)</label
-      >
-      <input
-        type="text"
-        id="amount"
-        placeholder="Enter amount..."
+  <div>
+    <v-card-title class="text-h5 font-weight-bold mb-4">
+      <v-icon icon="mdi-plus-circle" class="me-2"></v-icon>
+      Add New Transaction
+    </v-card-title>
+    
+    <v-form @submit.prevent="onSubmit" ref="form">
+      <v-text-field
+        v-model="text"
+        label="Transaction Description"
+        placeholder="Enter transaction description..."
+        variant="outlined"
+        prepend-inner-icon="mdi-text"
+        :rules="[v => !!v || 'Description is required']"
+        class="mb-4"
+      ></v-text-field>
+      
+      <v-text-field
         v-model="amount"
-      />
-    </div>
-    <button class="btn">Add transaction</button>
-  </form>
+        label="Amount"
+        placeholder="Enter amount..."
+        variant="outlined"
+        prepend-inner-icon="mdi-currency-usd"
+        type="number"
+        step="0.01"
+        :rules="[
+          v => !!v || 'Amount is required',
+          v => !isNaN(v) || 'Amount must be a number',
+          v => parseFloat(v) !== 0 || 'Amount cannot be zero'
+        ]"
+        class="mb-6"
+      >
+        <template v-slot:append>
+          <v-tooltip location="top">
+            <template v-slot:activator="{ props }">
+              <v-icon
+                v-bind="props"
+                icon="mdi-information"
+                color="info"
+              ></v-icon>
+            </template>
+            <span>Positive for income, negative for expense</span>
+          </v-tooltip>
+        </template>
+      </v-text-field>
+      
+      <v-btn
+        type="submit"
+        color="primary"
+        size="large"
+        block
+        :loading="loading"
+        prepend-icon="mdi-plus"
+      >
+        Add Transaction
+      </v-btn>
+    </v-form>
+  </div>
 </template>
 
 <script setup>
@@ -27,16 +65,23 @@ import { ref } from 'vue';
 
 const text = ref('');
 const amount = ref('');
+const loading = ref(false);
+const form = ref(null);
 
 // Get toast interface
 const toast = useToast();
 
 const emit = defineEmits(['transactionSubmitted']);
 
-const onSubmit = () => {
-  if (!text.value || !amount.value) {
-    // Display a toast error message if either field is empty
-    toast.error('Both fields must be filled.');
+const onSubmit = async () => {
+  loading.value = true;
+  
+  // Validate form
+  const { valid } = await form.value.validate();
+  
+  if (!valid) {
+    loading.value = false;
+    toast.error('Please fill in all required fields correctly.');
     return;
   }
 
@@ -50,5 +95,8 @@ const onSubmit = () => {
   // Clear form fields
   text.value = '';
   amount.value = '';
+  form.value.resetValidation();
+  
+  loading.value = false;
 };
 </script>
